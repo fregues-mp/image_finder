@@ -49,7 +49,7 @@
        c += 1
    ```
 
-3. A função **EI()** (ou **VI()**, se preferir) permite parar o loop automaticamente ao detectar uma imagem específica chamada "reset" ou outra de sua escolha. Quando a imagem for detectada, o loop será interrompido.
+3. A função **EI()** permite parar o loop automaticamente ao detectar uma imagem específica chamada "reset" ou outra de sua escolha. Quando a imagem for detectada, o loop será interrompido.
 
     Exemplo:
     ```python
@@ -57,6 +57,35 @@
         c = 0
         break  
     ```
+
+### Clique em Bordas e Cantos
+
+Agora, você pode especificar onde deseja que o clique ocorra, utilizando funções de clique específicas que podem ser aplicadas em diferentes partes da imagem detectada, como as bordas ou os cantos.
+
+Exemplo de uso:
+
+```python
+# Clicar no centro
+base.EI_Click_PN(r'data/test.png', name='test', move_func=base.center, value=c)
+
+# Clicar na borda esquerda
+base.EI_Click_PN(r'data/test.png', name='test', move_func=base.botton_left, value=c)
+
+# Clicar a esquerda
+base.EI_Click_PN(r'data/test.png', name='test', move_func=base.left, value=c)
+```
+
+Funções de movimento disponíveis:
+
+- `center(pos, size)` - centro
+- `bottom(pos, size)` - borda inferior
+- `top(pos, size)` - borda superior
+- `left(pos, size)` - borda esquerda
+- `right(pos, size)` - borda direita
+- `top_left(pos, size)` - canto superior esquerdo
+- `top_right(pos, size)` - canto superior direito
+- `bottom_left(pos, size)` - canto inferior esquerdo
+- `bottom_right(pos, size)` - canto inferior direito
 
 ### Formatos de Imagem Suportados
 
