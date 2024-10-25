@@ -82,20 +82,58 @@ def EI(name):
     return False
 
 
-def EI_ClickCenter(image, name): # encontra a imagem determinada e clica
-    pos, tamanho = DIP(image)
-    if pos:
-        centro_x = pos[0] + tamanho[1] // 2
-        centro_y = pos[1] + tamanho[0] // 2
-        pyautogui.moveTo(centro_x, centro_y)
-        pyautogui.click()
-        log(f"File: - - - '{name}' | Found | - - - - - - - - - - | 0")
-        return True
-    return False
+def center(pos, tamanho):
+    x = pos[0] + tamanho[1] // 2
+    y = pos[1] + tamanho[0] // 2
+    pyautogui.moveTo(x, y)
 
-def PN(*paths, name, value):
+def bottom(pos, tamanho):
+    x = pos[0] + tamanho[1] // 2
+    y = pos[1] + tamanho[0]
+    pyautogui.moveTo(x, y)
+
+def top(pos, tamanho):
+    x = pos[0] + tamanho[1] // 2
+    y = pos[1]
+    pyautogui.moveTo(x, y)
+
+def left(pos, tamanho):
+    x = pos[0]
+    y = pos[1] + tamanho[0] // 2
+    pyautogui.moveTo(x, y)
+
+def right(pos, tamanho):
+    x = pos[0] + tamanho[1]
+    y = pos[1] + tamanho[0] // 2
+    pyautogui.moveTo(x, y)
+
+def top_left(pos, tamanho):
+    x = pos[0]
+    y = pos[1]
+    pyautogui.moveTo(x, y)
+
+def top_right(pos, tamanho):
+    x = pos[0] + tamanho[1]
+    y = pos[1]
+    pyautogui.moveTo(x, y)
+
+def bottom_left(pos, tamanho):
+    x = pos[0]
+    y = pos[1] + tamanho[0]
+    pyautogui.moveTo(x, y)
+
+def bottom_right(pos, tamanho):
+    x = pos[0] + tamanho[1]
+    y = pos[1] + tamanho[0]
+    pyautogui.moveTo(x, y)
+
+def EI_Click_PN(*paths, name, move_func, value): 
     for path in paths:
-        if EI_ClickCenter(path, name):
+        pos, tamanho = DIP(path)
+        if pos:
+            move_func(pos, tamanho)
+            pyautogui.click()
+            log(f"File: - - - '{name}' | Found | {move_func.__name__} | 0")
             return True
         log(f"File: - - - {name} | Not Found | - - - - - - - - - - | {value}")
     return False
