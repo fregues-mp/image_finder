@@ -24,7 +24,7 @@ def log(msg):
 
 parar = False
 
-def VI(): # parar com o console
+def VI(): # parar no console
     if keyboard.is_pressed('esc'):
         log("File: - - - 'Exit' | Finish | - - - - - - - - - - | 0")
         return True
@@ -81,7 +81,7 @@ def EI_ClickCenter(image, name): # encontra a imagem determinada e clica
     return False
 
 def VR_ClickCenter():
-    pos, tamanho = DIP(r'data\server_down.png')
+    pos, tamanho = DIP(r'data\reset.png')
     if pos:
         centro_x = pos[0] + tamanho[1] // 2
         centro_y = pos[1] + tamanho[0] // 2
