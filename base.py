@@ -34,10 +34,16 @@ def DIP(image, threshold=0.8): # detectar imagem na tela
     screenshot = np.array(screenshot)
     screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
 
+    if VI('reset'):
+        return
+
     modelo = cv2.imread(image, cv2.IMREAD_UNCHANGED)
     if modelo is None:
         log(f"File: - - - '{image}' | Error | - - - - - - - - - - | 0")
         return None, None
+    
+    if VI('reset'):
+        return
 
     if len(modelo.shape) == 3 and modelo.shape[2] == 4:
         bgr_modelo = modelo[:, :, :3]
@@ -47,15 +53,24 @@ def DIP(image, threshold=0.8): # detectar imagem na tela
         bgr_modelo = modelo
         mask = None
 
+    if VI('reset'):
+        return
+
     if mask is not None:
         resultado = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED, mask=mask)
     else:
         resultado = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED)
 
+    if VI('reset'):
+        return
+
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
 
     if max_val >= threshold:
         return max_loc, bgr_modelo.shape[:2]
+    
+    if VI('reset'):
+        return
 
     return None, None
 
