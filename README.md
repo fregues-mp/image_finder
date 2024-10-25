@@ -53,9 +53,9 @@
 
     Exemplo:
     ```python
-        if base.EI('reset'):
-            c = 0
-            break  
+    if base.EI('reset'):
+        c = 0
+        break  
     ```
 
 ### Formatos de Imagem Suportados
