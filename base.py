@@ -1,6 +1,5 @@
 import os
 import pyautogui
-import time
 from datetime import datetime
 import keyboard
 import cv2
@@ -79,11 +78,9 @@ def EI_ClickCenter(image, name): # encontra a imagem determinada e clica
         return True
     return False
 
-def PN(*paths, name, c):
+def PN(*paths, name, value):
     for path in paths:
-        if VI():
-            return
         if EI_ClickCenter(path, name):
             return True
-        log(f"File: - - - {name} | Not Found | - - - - - - - - - - | {c}")
+        log(f"File: - - - {name} | Not Found | - - - - - - - - - - | {value}")
     return False
