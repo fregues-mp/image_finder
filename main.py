@@ -4,11 +4,11 @@ def run():
     c = 0
     while True:
 
+        if base.VI('reset'):
+            break
+        
         if base.EI('reset'):
             c = 0
-            break       
-
-        if base.VI('reset'):
             break
 
         if not base.PN(r'data\test.png', name='test', value=c):
