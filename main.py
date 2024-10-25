@@ -6,10 +6,6 @@ def run():
 
         if base.VI('reset'):
             break
-        
-        if base.EI('reset'):
-            c = 0
-            break
 
         if not base.PN(r'data\test.png', name='test', value=c):
             c += 1
