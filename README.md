@@ -1,114 +1,108 @@
 ## Image Finder
 
-**Image Finder** é uma ferramenta de automação em Python que permite ao usuário detectar imagens específicas na tela, criadas previamente, e interagir automaticamente com elas. Este projeto facilita a criação e detecção de padrões visuais para automação de processos repetitivos que envolvem elementos gráficos.
+**Image Finder** is an automation tool in Python that allows users to detect specific images on the screen that were created beforehand and interact automatically with them. This project facilitates the creation and detection of visual patterns for automating repetitive processes involving graphical elements.
 
-### Funcionalidades
-- **Detecção de Imagens Personalizadas**: Permite que o usuário configure imagens específicas que o programa identificará na tela.
-- **Interação Automática**: Ao detectar a imagem, realiza cliques automáticos na posição exata.
-- **Logs**: Cada ação é registrada em um arquivo de log com data e hora.
-- **Interrupção**: Pressione "ESC" a qualquer momento para interromper a execução.
-
-### Requisitos
+### Requirements
 - Python 3.6+
 - `pyautogui`
 - `cv2` (OpenCV)
 - `keyboard`
 - `numpy`
 
-### Executando
+### Running
 
-1. Clone o repositório:
+1. Clone the repository:
     ```bash
     git clone https://github.com/fregues-mp/image_finder.git
     ```
 
-2. Instale as dependências necessárias:
+2. Install the required dependencies:
     ```bash
     pip install pyautogui opencv-python keyboard numpy
     ```
 
-3. Execute o macro com o seguinte comando:
+3. Run the macro with the following command:
     ```bash
     python main.py
     ```
 
-### Como Usar
-1. Crie as imagens que deseja detectar na tela e adicione-as ao diretório do projeto. Ajuste o nome das imagens conforme necessário no código.
+### How to Use
+1. Create the images you want to detect on the screen and add them to the project directory. Adjust the image names as necessary in the code.
 
-   Exemplo:
+   Example:
    ```python
    if not base.PN(r'data\test.png', name='test', value=c):
        c += 1
    ```
 
-2. Adicione variações da mesma imagem. O programa buscará a próxima imagem somente se a anterior não for encontrada.
+2. Add variations of the same image. The program will look for the next image only if the previous one is not found.
 
-   Exemplo:
+   Example:
    ```python
    if not base.PN(r'data\test.png', r'data\test2.png', r'data\test3.png', name='test', value=c):
        c += 1
    ```
 
-3. A função **EI()** permite parar o loop automaticamente ao detectar uma imagem específica chamada "reset" ou outra de sua escolha. Quando a imagem for detectada, o loop será interrompido.
+3. The **EI()** function allows you to automatically stop the loop upon detecting a specific image called "reset" or another of your choice. When the image is detected, the loop will be interrupted.
 
-    Exemplo:
+    Example:
     ```python
     if base.EI('reset'):
         c = 0
         break  
     ```
 
-### Clique em Bordas e Cantos
+### Click on Edges and Corners
 
-Agora, você pode especificar onde deseja que o clique ocorra, utilizando funções de clique específicas que podem ser aplicadas em diferentes partes da imagem detectada, como as bordas ou os cantos.
+Now, you can specify where you want the click to occur, using specific click functions that can be applied to different parts of the detected image, such as the edges or corners.
 
-Exemplo de uso:
+Example usage:
 
 ```python
-# Clicar no centro
+# Click in the center
 base.EI_Click_PN(r'data/test.png', name='test', move_func=base.center, value=c)
 
-# Clicar na borda esquerda
-base.EI_Click_PN(r'data/test.png', name='test', move_func=base.botton_left, value=c)
+# Click in the bottom left corner
+base.EI_Click_PN(r'data/test.png', name='test', move_func=base.bottom_left, value=c)
 
-# Clicar a esquerda
+# Click to the left
 base.EI_Click_PN(r'data/test.png', name='test', move_func=base.left, value=c)
 ```
 
-Funções de movimento disponíveis:
+Available movement functions:
 
-- `center(pos, size)` - centro
-- `bottom(pos, size)` - borda inferior
-- `top(pos, size)` - borda superior
-- `left(pos, size)` - borda esquerda
-- `right(pos, size)` - borda direita
-- `top_left(pos, size)` - canto superior esquerdo
-- `top_right(pos, size)` - canto superior direito
-- `bottom_left(pos, size)` - canto inferior esquerdo
-- `bottom_right(pos, size)` - canto inferior direito
+- `center(pos, size)` - center
+- `bottom(pos, size)` - bottom edge
+- `top(pos, size)` - top edge
+- `left(pos, size)` - left edge
+- `right(pos, size)` - right edge
+- `top_left(pos, size)` - top left corner
+- `top_right(pos, size)` - top right corner
+- `bottom_left(pos, size)` - bottom left corner
+- `bottom_right(pos, size)` - bottom right corner
 
-### Formatos de Imagem Suportados
+### Supported Image Formats
 
-O OpenCV suporta uma variedade de formatos de imagem que podem ser usados com a função de detecção. Alguns dos formatos suportados incluem:
+OpenCV supports a variety of image formats that can be used with the detection function. Some of the supported formats include:
 
 - **PNG** (`.png`)
 - **JPEG** (`.jpg`, `.jpeg`)
 - **BMP** (`.bmp`)
 - **TIFF** (`.tiff`, `.tif`)
-- **GIF** (`.gif`) - apenas a primeira imagem em uma sequência de GIFs animados.
+- **GIF** (`.gif`) - only the first image in an animated GIF sequence.
 - **PPM** (`.ppm`)
 - **PGM** (`.pgm`)
 - **PBM** (`.pbm`)
-- **WebP** (`.webp`) - disponível em versões mais recentes do OpenCV.
+- **WebP** (`.webp`) - available in newer versions of OpenCV.
 
-### Contribuições
+### Contributions
 
-![marca_small](https://github.com/user-attachments/assets/3a29afa3-0b39-43ee-9760-cca03d978e62)
+![logo_small](https://github.com/user-attachments/assets/3a29afa3-0b39-43ee-9760-cca03d978e62)
 
 -------
 
-Sinta-se à vontade para contribuir! Abra um *issue* ou envie um *pull request*.
+Feel free to contribute! Open an *issue* or submit a *pull request*.
 
-### Licença
+### License
 
-Este projeto está licenciado sob a [MIT License](https://github.com/fregues-mp/image_finder/blob/main/LICENSE).
+This project is licensed under the [MIT License](https://github.com/fregues-mp/image_finder/blob/main/LICENSE).
