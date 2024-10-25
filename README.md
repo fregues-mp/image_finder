@@ -60,7 +60,7 @@
 
 ### Formatos de Imagem Suportados
 
-O OpenCV suporta uma variedade de formatos de imagem que podem ser usados com a função de detecção. Os formatos suportados incluem:
+O OpenCV suporta uma variedade de formatos de imagem que podem ser usados com a função de detecção. Alguns dos formatos suportados incluem:
 
 - **PNG** (`.png`)
 - **JPEG** (`.jpg`, `.jpeg`)
