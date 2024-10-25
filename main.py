@@ -7,7 +7,7 @@ def run():
         if base.VI('reset'):
             break
 
-        if not base.PN(r'data\test.png', name='test', value=c):
+        if not base.EI_Click(r'data\test.png', name='test', move_func=center, value=c):
             c += 1
 
 if __name__ == "__main__":
