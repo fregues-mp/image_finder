@@ -58,6 +58,20 @@ Ex:
         break  
 ```
 
+### Formatos de Imagem Suportados
+
+O OpenCV suporta uma variedade de formatos de imagem que podem ser usados com a função de detecção. Os formatos suportados incluem:
+
+- **PNG** (`.png`)
+- **JPEG** (`.jpg`, `.jpeg`)
+- **BMP** (`.bmp`)
+- **TIFF** (`.tiff`, `.tif`)
+- **GIF** (`.gif`) - apenas a primeira imagem em uma sequência de GIFs animados.
+- **PPM** (`.ppm`)
+- **PGM** (`.pgm`)
+- **PBM** (`.pbm`)
+- **WebP** (`.webp`) - disponível em versões mais recentes do OpenCV.
+
 ### Contribuições
 
 ![marca_small](https://github.com/user-attachments/assets/3a29afa3-0b39-43ee-9760-cca03d978e62)
@@ -68,4 +82,4 @@ Sinta-se à vontade para contribuir! Abra um *issue* ou envie um *pull request*.
 
 ### Licença
 
-Este projeto está licenciado sob a [MIT License](https://github.com/fregues-mp/image_finder/blob/main/LICENSE.txt).
+Este projeto está licenciado sob a [MIT License](https://github.com/fregues-mp/image_finder/blob/main/LICENSE).
