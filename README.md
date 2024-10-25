@@ -51,12 +51,12 @@
 
 3. A função **EI()** (ou **VI()**, se preferir) permite parar o loop automaticamente ao detectar uma imagem específica chamada "reset" ou outra de sua escolha. Quando a imagem for detectada, o loop será interrompido.
 
-Ex:
-```python
-    if base.EI('reset'):
-        c = 0
-        break  
-```
+    Exemplo:
+    ```python
+        if base.EI('reset'):
+            c = 0
+            break  
+    ```
 
 ### Formatos de Imagem Suportados
 
