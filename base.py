@@ -5,15 +5,14 @@ import keyboard
 import cv2
 import numpy as np
 
-# LOGS
 log_dir = r'logs'
 os.makedirs(log_dir, exist_ok=True)
 
 date_time = datetime.now().strftime("%d-%m-%Y")
-path_name_log = f'LOG_{date_time}.txt'
-dir_log = os.path.join(log_dir, path_name_log)
+file_name_log = f'LOG_{date_time}.txt'
+path_log = os.path.join(log_dir, file_name_log)
 
-log_file = open(dir_log, 'a')
+log_file = open(path_log, 'a')
 
 def log(msg):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -39,9 +38,6 @@ def DIP(image, threshold=0.8):
     if modelo is None:
         log(f"File: - - - '{image}' | Error | - - - - - - - - - - | 0")
         return None, None
-    
-    if VI():
-        return
 
     if len(modelo.shape) == 3 and modelo.shape[2] == 4:
         bgr_modelo = modelo[:, :, :3]
@@ -53,14 +49,11 @@ def DIP(image, threshold=0.8):
 
     if VI():
         return
-
+    
     if mask is not None:
         result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED, mask=mask)
     else:
         result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED)
-
-    if VI():
-        return
 
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
@@ -111,7 +104,7 @@ def bottom_left(pos, size):
 def bottom_right(pos, size):
     MTP(pos, size, size[1], size[0])
 
-def EI_Click_PN(*paths, name, move_func, value): 
+def EI_Click(*paths, name, move_func, value): 
     for path in paths:
         pos, size = DIP(path)
         if pos:
