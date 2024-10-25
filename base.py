@@ -60,14 +60,13 @@ def DIP(image, threshold=0.8): # detectar imagem na tela
 
     return None, None
 
-'''
-def EI(image, name):
-    image = DIP(image)
-    if image:
+def EI(name):
+    pos, _ = DIP(r'data/reset.png')
+    if pos:
         log(f"File: - - - '{name}' | Found | - - - - - - - - - - | 0")
         return True
     return False
-'''
+
 
 def EI_ClickCenter(image, name): # encontra a imagem determinada e clica
     pos, tamanho = DIP(image)
@@ -77,17 +76,6 @@ def EI_ClickCenter(image, name): # encontra a imagem determinada e clica
         pyautogui.moveTo(centro_x, centro_y)
         pyautogui.click()
         log(f"File: - - - '{name}' | Found | - - - - - - - - - - | 0")
-        return True
-    return False
-
-def VR_ClickCenter():
-    pos, tamanho = DIP(r'data\reset.png')
-    if pos:
-        centro_x = pos[0] + tamanho[1] // 2
-        centro_y = pos[1] + tamanho[0] // 2
-        pyautogui.moveTo(centro_x, centro_y)
-        pyautogui.click()
-        log("File: - - - 'Reset' | Found | - - - - - - - - - - | 0")
         return True
     return False
 
