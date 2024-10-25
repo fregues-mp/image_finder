@@ -9,11 +9,11 @@ import numpy as np
 log_dir = r'logs'
 os.makedirs(log_dir, exist_ok=True)
 
-data_atual = datetime.now().strftime("%d-%m-%Y")
-nome_arquivo_log = f'LOG_{data_atual}.txt'
-caminho_log = os.path.join(log_dir, nome_arquivo_log)
+date_time = datetime.now().strftime("%d-%m-%Y")
+path_name_log = f'LOG_{date_time}.txt'
+dir_log = os.path.join(log_dir, path_name_log)
 
-log_file = open(caminho_log, 'a')
+log_file = open(dir_log, 'a')
 
 def log(msg):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -21,20 +21,18 @@ def log(msg):
     print(log_message)
     log_file.write(log_message + '\n')
 
-parar = False
-
-def VI(): # parar no console
+def VI():
     if keyboard.is_pressed('esc'):
         log("File: - - - 'Exit' | Finish | - - - - - - - - - - | 0")
         return True
     return False 
 
-def DIP(image, threshold=0.8): # detectar imagem na tela
+def DIP(image, threshold=0.8):
     screenshot = pyautogui.screenshot()
     screenshot = np.array(screenshot)
     screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
 
-    if VI('reset'):
+    if VI():
         return
 
     modelo = cv2.imread(image, cv2.IMREAD_UNCHANGED)
@@ -42,7 +40,7 @@ def DIP(image, threshold=0.8): # detectar imagem na tela
         log(f"File: - - - '{image}' | Error | - - - - - - - - - - | 0")
         return None, None
     
-    if VI('reset'):
+    if VI():
         return
 
     if len(modelo.shape) == 3 and modelo.shape[2] == 4:
@@ -53,23 +51,23 @@ def DIP(image, threshold=0.8): # detectar imagem na tela
         bgr_modelo = modelo
         mask = None
 
-    if VI('reset'):
+    if VI():
         return
 
     if mask is not None:
-        resultado = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED, mask=mask)
+        result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED, mask=mask)
     else:
-        resultado = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED)
+        result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED)
 
-    if VI('reset'):
+    if VI():
         return
 
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(resultado)
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
 
     if max_val >= threshold:
         return max_loc, bgr_modelo.shape[:2]
     
-    if VI('reset'):
+    if VI():
         return
 
     return None, None
@@ -81,57 +79,43 @@ def EI(name):
         return True
     return False
 
-
-def center(pos, tamanho):
-    x = pos[0] + tamanho[1] // 2
-    y = pos[1] + tamanho[0] // 2
+def MTP(pos, size, offset_x=0, offset_y=0):
+    x = pos[0] + offset_x
+    y = pos[1] + offset_y
     pyautogui.moveTo(x, y)
 
-def bottom(pos, tamanho):
-    x = pos[0] + tamanho[1] // 2
-    y = pos[1] + tamanho[0]
-    pyautogui.moveTo(x, y)
+def center(pos, size):
+    MTP(pos, size, size[1] // 2, size[0] // 2)
 
-def top(pos, tamanho):
-    x = pos[0] + tamanho[1] // 2
-    y = pos[1]
-    pyautogui.moveTo(x, y)
+def bottom(pos, size):
+    MTP(pos, size, size[1] // 2, size[0])
 
-def left(pos, tamanho):
-    x = pos[0]
-    y = pos[1] + tamanho[0] // 2
-    pyautogui.moveTo(x, y)
+def top(pos, size):
+    MTP(pos, size, size[1] // 2, 0)
 
-def right(pos, tamanho):
-    x = pos[0] + tamanho[1]
-    y = pos[1] + tamanho[0] // 2
-    pyautogui.moveTo(x, y)
+def left(pos, size):
+    MTP(pos, size, 0, size[0] // 2)
 
-def top_left(pos, tamanho):
-    x = pos[0]
-    y = pos[1]
-    pyautogui.moveTo(x, y)
+def right(pos, size):
+    MTP(pos, size, size[1], size[0] // 2)
 
-def top_right(pos, tamanho):
-    x = pos[0] + tamanho[1]
-    y = pos[1]
-    pyautogui.moveTo(x, y)
+def top_left(pos, size):
+    MTP(pos, size, 0, 0)
 
-def bottom_left(pos, tamanho):
-    x = pos[0]
-    y = pos[1] + tamanho[0]
-    pyautogui.moveTo(x, y)
+def top_right(pos, size):
+    MTP(pos, size, size[1], 0)
 
-def bottom_right(pos, tamanho):
-    x = pos[0] + tamanho[1]
-    y = pos[1] + tamanho[0]
-    pyautogui.moveTo(x, y)
+def bottom_left(pos, size):
+    MTP(pos, size, 0, size[0])
+
+def bottom_right(pos, size):
+    MTP(pos, size, size[1], size[0])
 
 def EI_Click_PN(*paths, name, move_func, value): 
     for path in paths:
-        pos, tamanho = DIP(path)
+        pos, size = DIP(path)
         if pos:
-            move_func(pos, tamanho)
+            move_func(pos, size)
             pyautogui.click()
             log(f"File: - - - '{name}' | Found | {move_func.__name__} | 0")
             return True
