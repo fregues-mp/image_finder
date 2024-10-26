@@ -31,7 +31,7 @@
 
    Example:
    ```python
-   if not base.PN(r'data\test.png', name='test', value=c):
+   if not base.PN(r'data\example.png', name='test', move_func=base.center, value=c):
        c += 1
    ```
 
@@ -39,7 +39,7 @@
 
    Example:
    ```python
-   if not base.PN(r'data\test.png', r'data\test2.png', r'data\test3.png', name='test', value=c):
+   if not base.PN(r'data\example1.png', r'data\example2.png', r'data\example3.png', name='test', move_func=base.center, value=c):
        c += 1
    ```
 
