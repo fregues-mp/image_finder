@@ -31,28 +31,20 @@ def DIP(image, threshold=0.8):
     screenshot = np.array(screenshot)
     screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
 
-    if VI():
-        return
-
     modelo = cv2.imread(image, cv2.IMREAD_UNCHANGED)
     if modelo is None:
         log(f"File: - - - '{image}' | Error | - - - - - - - - - - | 0")
         return None, None
 
-    if len(modelo.shape) == 3 and modelo.shape[2] == 4:
+    has_transparency = (modelo.shape[2] == 4) if len(modelo.shape) == 3 else False
+
+    if has_transparency:
         bgr_modelo = modelo[:, :, :3]
         alpha_modelo = modelo[:, :, 3]
         mask = cv2.threshold(alpha_modelo, 0, 255, cv2.THRESH_BINARY)[1]
-    else:
-        bgr_modelo = modelo
-        mask = None
-
-    if VI():
-        return
-    
-    if mask is not None:
         result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED, mask=mask)
     else:
+        bgr_modelo = modelo
         result = cv2.matchTemplate(screenshot, bgr_modelo, cv2.TM_CCOEFF_NORMED)
 
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
@@ -60,9 +52,6 @@ def DIP(image, threshold=0.8):
     if max_val >= threshold:
         return max_loc, bgr_modelo.shape[:2]
     
-    if VI():
-        return
-
     return None, None
 
 def EI(name):
